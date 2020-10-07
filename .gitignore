@@ -1,0 +1,7 @@
+output
+data
+install
+ext-projects
+.idea
+cmake-build*
+__pycache__
