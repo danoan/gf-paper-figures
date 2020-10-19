@@ -6,7 +6,7 @@
 
 using namespace DGtal::Z2i;
 
-double totalSquaredCurvature(const DigitalSet& ds,double estimationRadius){
+double totalSquaredCurvature(const DigitalSet& ds,double estimationRadius,double h){
   using namespace GEOC::API::GridCurve;
 
   Curve curve;
@@ -18,10 +18,10 @@ double totalSquaredCurvature(const DigitalSet& ds,double estimationRadius){
 
   std::vector<double> evK;
   GEOC::Estimator::Standard::IICurvatureExtraData data(true,estimationRadius);
-  GEOC::Estimator::Standard::IICurvature<Curve::ConstIterator>(ds,curve.begin(),curve.end(),evK,1.0,&data);
+  GEOC::Estimator::Standard::IICurvature<Curve::ConstIterator>(ds,curve.begin(),curve.end(),evK,h,&data);
 
   std::vector<double> evL;
-  Length::mdssClosed<Length::EstimationAlgorithms::ALG_PROJECTED >(kspace,curve.begin(),curve.end(),evL,1.0, nullptr);
+  Length::mdssClosed<Length::EstimationAlgorithms::ALG_PROJECTED >(kspace,curve.begin(),curve.end(),evL,h, nullptr);
 
   double totalK2=0;
   auto itK=evK.begin();
@@ -35,7 +35,7 @@ double totalSquaredCurvature(const DigitalSet& ds,double estimationRadius){
   return totalK2;
 }
 
-double perimeter(const DigitalSet& ds){
+double perimeter(const DigitalSet& ds,double h){
   using namespace GEOC::API::GridCurve::Length;
 
   Curve curve;
@@ -44,7 +44,7 @@ double perimeter(const DigitalSet& ds){
   std::vector<double> ev;
   KSpace kspace;
   kspace.init(ds.domain().lowerBound(),ds.domain().upperBound(),true);
-  mdssClosed<EstimationAlgorithms::ALG_PROJECTED >(kspace,curve.begin(),curve.end(),ev,1.0, nullptr);
+  mdssClosed<EstimationAlgorithms::ALG_PROJECTED >(kspace,curve.begin(),curve.end(),ev,h, nullptr);
 
   double p=0;
   for(double d:ev) p+=d;
@@ -55,6 +55,7 @@ double perimeter(const DigitalSet& ds){
 int main(int argc, char* argv[]){
   std::string imageFilepath=argv[1];
   double estimationRadius = std::atof(argv[2]);
+  double h=std::atof(argv[3]);
 
   cv::Mat cvImg = cv::imread(imageFilepath,cv::IMREAD_GRAYSCALE);
 
@@ -65,8 +66,8 @@ int main(int argc, char* argv[]){
   DigitalSet ds(domain);
   DIPaCUS::Representation::CVMatToDigitalSet(ds,cvImg);
 
-  double p = perimeter(ds);
-  double tk2 = totalSquaredCurvature(ds,estimationRadius);
+  double p = perimeter(ds,h);
+  double tk2 = totalSquaredCurvature(ds,estimationRadius,h);
 
   std::cout << p << "\t" << tk2 << std::endl;
 
