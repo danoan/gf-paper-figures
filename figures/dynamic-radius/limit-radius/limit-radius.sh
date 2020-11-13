@@ -40,7 +40,7 @@ cond_print(){
 
 
 LOWER_RADIUS=10
-HIGHER_RADIUS=1000
+HIGHER_RADIUS=1500
 RADIUS=$( python3 -c "print(int( (${HIGHER_RADIUS} + ${LOWER_RADIUS})/2))" )
 
 while [ $LOWER_RADIUS -lt $HIGHER_RADIUS ]
