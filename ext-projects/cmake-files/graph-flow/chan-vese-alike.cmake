@@ -1,6 +1,6 @@
 ExternalProject_Add(graph-flow-cv
         GIT_REPOSITORY https://github.com/danoan/graph-flow.git
-        GIT_TAG v0.3-dev
+        GIT_TAG v0.3.1-dev
         SOURCE_DIR ${EXTPROJECTS_SOURCE_DIR}/graph-flow-cv
         CMAKE_ARGS
         -DCMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}
@@ -21,4 +21,4 @@ ExternalProject_Add(graph-flow-cv
         -DBOOST_INCLUDE_DIRS=${BOOST_INCLUDE_DIRS}
         -DBOOST_LIBS_DIR=${BOOST_LIBS_DIR})
 
-add_dependencies(graph-flow-cv dipacus geoc gcurve magLac btools)
+add_dependencies(graph-flow-cv dipacus geoc magLac)

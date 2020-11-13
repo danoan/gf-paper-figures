@@ -11,6 +11,6 @@ ExternalProject_Add(geoc
         -DDIPACUS_LIBS_DIR=${EXTPROJECTS_BUILD_DIR}/lib
         -DBOOST_LIBS_DIR=${BOOST_LIBS_DIR}
         -DBOOST_INCLUDE_DIRS=${BOOST_INCLUDE_DIRS}
-        -DBUILD_APPS=ON)
+        -DBUILD_APPS=OFF)
 
-add_dependencies(geoc dipacus gcurve)
+add_dependencies(geoc dipacus)

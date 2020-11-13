@@ -35,6 +35,10 @@ add_executable(best-segmentation
         src/RoundedRect.cpp
         src/energy.cpp)
 
+if(${USE_REMOTE_REPOSITORIES})
+    add_dependencies(best-segmentation dipacus geoc)
+endif()
+
 target_include_directories(best-segmentation PRIVATE
         include
         ${BOOST_INCLUDE_DIRS}
