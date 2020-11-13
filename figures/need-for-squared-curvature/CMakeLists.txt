@@ -14,7 +14,6 @@ target_include_directories(need-for-squared-curvature PRIVATE
         include
         ${BOOST_INCLUDE_DIRS}
         ${DIPACUS_INCLUDE_DIRS}
-        ${SCABOLIC_INCLUDE_DIRS}
         ${DGTAL_INCLUDE_DIRS})
 
 target_link_directories(need-for-squared-curvature PRIVATE
@@ -43,7 +42,6 @@ target_include_directories(best-segmentation PRIVATE
         include
         ${BOOST_INCLUDE_DIRS}
         ${DIPACUS_INCLUDE_DIRS}
-        ${SCABOLIC_INCLUDE_DIRS}
         ${DGTAL_INCLUDE_DIRS})
 
 target_link_directories(best-segmentation PRIVATE

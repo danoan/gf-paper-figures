@@ -12,7 +12,6 @@ target_include_directories(generate-disk PRIVATE
         include
         ${BOOST_INCLUDE_DIRS}
         ${DIPACUS_INCLUDE_DIRS}
-        ${SCABOLIC_INCLUDE_DIRS}
         ${DGTAL_INCLUDE_DIRS})
 
 target_link_directories(generate-disk PRIVATE
