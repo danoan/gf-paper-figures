@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 SCRIPT_PATH=$(cd $(dirname ${BASH_SOURCE[0]}) && pwd)
-PROJECT_PATH=$( cd $SCRIPT_PATH && cd ../.. && pwd)
+PROJECT_PATH=$( cd $SCRIPT_PATH && cd ../../.. && pwd)
 
 LEGNTH_RATIO_APP="${PROJECT_PATH}/cmake-build-release/figures/length-ratio-decrease/length-ratio-decrease"
 GENERATE_DISK_APP="${PROJECT_PATH}/cmake-build-release/figures/limit-radius/generate-disk"
