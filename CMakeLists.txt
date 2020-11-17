@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 project(graph-flow-paper-figures)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(EXTPROJECTS_SOURCE_DIR ${CMAKE_SOURCE_DIR}/ext-projects/source)
 
 if (${CMAKE_BUILD_TYPE} STREQUAL Release)
@@ -34,3 +34,4 @@ add_subdirectory(figures/dynamic-radius/limit-radius)
 add_subdirectory(figures/dynamic-radius/length-ratio-decrease)
 add_subdirectory(figures/need-for-squared-curvature)
 add_subdirectory(figures/threshold-dynamics)
+add_subdirectory(figures/dynamic-radius/find-balance-radius)

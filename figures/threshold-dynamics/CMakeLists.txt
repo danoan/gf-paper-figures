@@ -4,7 +4,7 @@ project(threshold-dynamics)
 add_executable(threshold-dynamics 
 threshold-dynamics.cpp)
 
-add_dependencies(threshold-dynamics dipacus)
+add_dependencies(threshold-dynamics dipacus graph-flow)
 
 target_include_directories(threshold-dynamics PRIVATE
 include
