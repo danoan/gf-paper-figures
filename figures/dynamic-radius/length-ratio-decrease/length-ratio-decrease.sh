@@ -5,7 +5,7 @@ PROJECT_PATH=$( cd $SCRIPT_PATH && cd ../../.. && pwd)
 
 LEGNTH_RATIO_APP="${PROJECT_PATH}/cmake-build-release/figures/dynamic-radius/length-ratio-decrease/length-ratio-decrease"
 GENERATE_DISK_APP="${PROJECT_PATH}/cmake-build-release/figures/dynamic-radius/limit-radius/generate-disk"
-GRAPH_FLOW_APP="${PROJECT_PATH}/ext-projects/cmake-build-release/bin/graph-flow-app"
+GRAPH_FLOW_APP="${PROJECT_PATH}/ext-projects/cmake-build-release/bin/gf-shape-evolution"
 
 DISK_RADIUS=$1
 H=$2
@@ -17,7 +17,7 @@ mkdir -p ${OUTPUT_FOLDER}
 
 DISK_IMAGE="${OUTPUT_FOLDER}/disk.png"
 ${GENERATE_DISK_APP} "${DISK_RADIUS}" "${DISK_IMAGE}" ${H}
-${GRAPH_FLOW_APP} -S"${DISK_IMAGE}" -h${H} -a0 -b1 -r"${EVOLUTION_RADIUS}" -N0 -O2 -i15 -s ${OUTPUT_FOLDER}/temp
+${GRAPH_FLOW_APP} -S"${DISK_IMAGE}" -h${H} -a0 -b1 -r"${EVOLUTION_RADIUS}" -N0 -O6 -i15 -s ${OUTPUT_FOLDER}/temp
 
 P="0"
 TK2="0"
