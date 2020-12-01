@@ -57,10 +57,7 @@ void displayVoronoi(const DigitalSet& shape, const Domain& domain, DTL2& dt,
   board.saveSVG(outputFilepath.c_str());
 }
 
-void displayCost(const Domain& KDomain, const DigitalSet& shapeK,
-                 const DigitalSet& innerContourK, double h, double ringWidth,
-                 const std::unordered_map<Point, EstimationData>& edMap,
-                 const DTL2& dtInn, const DTL2& dtOut,
+void displayCost(const std::unordered_map<Point,CostData>& costFunction,const DigitalSet& innerContourK,
                  const std::string& outputFilepath, std::ostream& os,
                  double maxCM) {
   typedef DGtal::GradientColorMap<double,
@@ -70,52 +67,16 @@ void displayCost(const Domain& KDomain, const DigitalSet& shapeK,
   MyColorMap hmap(0, maxCM);
   double M = 0;
 
-  DigitalSet ring(KDomain);
-  for (Point p : KDomain) {
-    double distance;
-    if (shapeK(p))
-      distance = dtInn(p);
-    else
-      distance = dtOut(p);
-
-    if (distance <= ringWidth) ring.insert(p);
-  }
-
   DGtal::Board2D board;
-  for (Point p : ring) {
-    Point closestPoint;
-    double sDistance;
-    if (shapeK(p)) {
-      closestPoint = dtInn.getVoronoiVector(p);
-      sDistance = -dtInn(p) / (2 * h);
-    } else {
-      closestPoint = dtOut.getVoronoiVector(p);
-      sDistance = dtOut(p) / (2 * h);
-    }
+  for (auto pk : costFunction) {
+    Point p = pk.first;
+    double cost = pk.second.cost;
 
-    if (edMap.find(closestPoint) == edMap.end()) {
-      // throw std::runtime_error("Linel or pointel missing");
-      continue;
-    }
-
-    EstimationData ed = edMap.at(closestPoint);
-    double curvatureCost;
-    if (ed.curvature > 0)
-      curvatureCost = 1.0 / (1.0 / ed.curvature + sDistance);
-    else
-      curvatureCost = 1.0 / (1.0 / ed.curvature - sDistance);
-
-    // double e = ed.localLength + ed.localLength * pow(curvatureCost, 2);
-    double e = pow(curvatureCost, 2);
-    if (e > M) M = e;
+    if (cost > M) M = cost;
 
     board << DGtal::CustomStyle(p.className(),
-                                new DGtal::CustomColors(hmap(e), hmap(e)))
+                                new DGtal::CustomColors(hmap(cost), hmap(cost)))
           << p;
-
-    os << "mapped curvature:" << ed.curvature
-       << "; curvature cost:" << curvatureCost << "; cost:" << e
-       << "; distance:" << sDistance << "\n";
   }
   os << M << "\n";
 

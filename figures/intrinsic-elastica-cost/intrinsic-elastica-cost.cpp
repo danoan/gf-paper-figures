@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <vector>
 
+#include "CostData.h"
 #include "EstimationData.h"
 #include "InputData.h"
 #include "display.h"
@@ -12,6 +13,7 @@
 #include "utils.h"
 
 using namespace DGtal::Z2i;
+typedef GraphFlow::Utils::Digital::DTL2 DTL2;
 
 void setEstimationDataMap(std::unordered_map<Point, EstimationData>& edMap,
                           const Curve& curve, const Domain& domain,
@@ -40,6 +42,52 @@ void setEstimationDataMap(std::unordered_map<Point, EstimationData>& edMap,
     it++;
     i++;
   } while (it != scellRange.end());
+}
+
+void setCostFunction(std::unordered_map<Point, CostData>& costFunction,
+                     const Domain& KDomain, const DigitalSet& shapeK,
+                     const DigitalSet& ring, double h, const DTL2& dtInn,
+                     const DTL2& dtOut,
+                     const std::unordered_map<Point, EstimationData>& edMap) {
+  KSpace kspace;
+  kspace.init(KDomain.lowerBound(), KDomain.upperBound(), true);
+
+  for (Point p : ring) {
+    if (p[0] % 2 == 0 && p[1] % 2 == 0) continue;  // Pointel
+    if ( abs(p[0]) % 2 == 1 && abs(p[1]) % 2 == 1) continue;  // Pixel
+
+    Point closestPoint;
+    double sDistance;
+    if (shapeK(p)) {
+      closestPoint = dtInn.getVoronoiVector(p);
+      sDistance = -dtInn(p) / (2 * h);
+    } else {
+      closestPoint = dtOut.getVoronoiVector(p);
+      sDistance = dtOut(p) / (2 * h);
+    }
+
+    if (edMap.find(closestPoint) == edMap.end()) {
+      // throw std::runtime_error("Linel or pointel missing");
+      continue;
+    }
+
+    EstimationData ed = edMap.at(closestPoint);
+    double curvatureCost;
+    if (ed.curvature > 0)
+      curvatureCost = 1.0 / (1.0 / ed.curvature + sDistance);
+    else
+      curvatureCost = 1.0 / (1.0 / ed.curvature - sDistance);
+
+    // double cost = ed.localLength + ed.localLength * pow(curvatureCost,
+    // 2);
+    double cost = pow(curvatureCost, 2);
+
+    KSpace::SCell linel = kspace.sCell(p);
+    auto pixels = kspace.sUpperIncident(linel);
+
+    costFunction[p] =
+        CostData{kspace.sCoords(pixels[0]), kspace.sCoords(pixels[1]), cost};
+  }
 }
 
 int main(int argc, char* argv[]) {
@@ -84,7 +132,17 @@ int main(int argc, char* argv[]) {
   auto dtOut =
       GraphFlow::Utils::Digital::exteriorDistanceTransform(KDomain, shapeK);
 
-  Display::displayCost(KDomain,shapeK,innerContourK,id.h,id.ringWidth,edMap,dtInn,dtOut,"costFunction.svg",std::cout,id.M);
+  // Set cost function
+  typedef DGtal::Z2i::Point LinelKCoords;
+  std::unordered_map<LinelKCoords, CostData> costFunction;  
+  
+  DigitalSet ring =
+      Utils::buildRing(KDomain, shapeK, dtInn, dtOut, id.ringWidth);
+  setCostFunction(costFunction, KDomain, shapeK, ring,id.h, dtInn, dtOut, edMap);
+
+
+  Display::displayCost(costFunction, innerContourK,
+                       "costFunction.svg", std::cout, id.M);
 
   return 0;
 }
