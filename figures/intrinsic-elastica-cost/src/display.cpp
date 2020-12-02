@@ -57,15 +57,17 @@ void displayVoronoi(const DigitalSet& shape, const Domain& domain, DTL2& dt,
   board.saveSVG(outputFilepath.c_str());
 }
 
-void displayCost(const std::unordered_map<Point,CostData>& costFunction,const DigitalSet& innerContourK,
+void displayCost(const std::unordered_map<Point, CostData>& costFunction,
+                 const DigitalSet& innerContourK,
                  const std::string& outputFilepath, std::ostream& os,
-                 double maxCM) {
+                 double minCM, double maxCM) {
   typedef DGtal::GradientColorMap<double,
                                   DGtal::ColorGradientPreset::CMAP_GRAYSCALE>
       MyColorMap;
 
-  MyColorMap hmap(0, maxCM);
+  MyColorMap hmap(minCM, maxCM);
   double M = 0;
+  double m = 100;
 
   DGtal::Board2D board;
   for (auto pk : costFunction) {
@@ -73,12 +75,14 @@ void displayCost(const std::unordered_map<Point,CostData>& costFunction,const Di
     double cost = pk.second.cost;
 
     if (cost > M) M = cost;
+    if (cost < m) m = cost;
 
     board << DGtal::CustomStyle(p.className(),
                                 new DGtal::CustomColors(hmap(cost), hmap(cost)))
           << p;
   }
-  os << M << "\n";
+  os << "Min unit cost: " << m << "\n"
+     << "Max unit cost: " << M << "\n";
 
   for (Point p : innerContourK) {
     board << DGtal::CustomStyle(p.className(),
@@ -87,6 +91,44 @@ void displayCost(const std::unordered_map<Point,CostData>& costFunction,const Di
           << p;
   }
 
+  board.saveSVG(outputFilepath.c_str());
+}
+
+void displayOptRegions(const DigitalSet& sureFg, const DigitalSet& optBand,
+                       const std::set<Point>& sourcePoints,
+                       const std::set<Point>& targetPoints,
+                       const std::string& outputFilepath) {
+  DGtal::Board2D board;
+  for (auto p : sourcePoints) {
+    board << DGtal::CustomStyle(p.className(),
+                                new DGtal::CustomColors(DGtal::Color::Blue,
+                                                        DGtal::Color::Blue))
+          << p;
+  }
+  for (auto p : optBand) {
+    board << DGtal::CustomStyle(p.className(),
+                                new DGtal::CustomColors(DGtal::Color::Yellow,
+                                                        DGtal::Color::Yellow))
+          << p;
+  }
+  for (auto p : targetPoints) {
+    board << DGtal::CustomStyle(
+                 p.className(),
+                 new DGtal::CustomColors(DGtal::Color::Red, DGtal::Color::Red))
+          << p;
+  }
+  for (auto p : sureFg) {
+    board << DGtal::CustomStyle(p.className(),
+                                new DGtal::CustomColors(DGtal::Color::Green,
+                                                        DGtal::Color::Green))
+          << p;
+  }
+  board.saveSVG(outputFilepath.c_str());
+}
+
+void simpleDisplay(const DigitalSet& ds, const std::string& outputFilepath) {
+  DGtal::Board2D board;
+  board << ds.domain() << ds;
   board.saveSVG(outputFilepath.c_str());
 }
 }  // namespace Display

@@ -6,7 +6,8 @@ intrinsic-elastica-cost.cpp
 src/estimators.cpp
 src/display.cpp
 src/utils.cpp
-src/inputReader.cpp)
+src/inputReader.cpp
+src/FlowGraph.cpp)
 
 if(${USE_REMOTE_REPOSITORIES})
         add_dependencies(intrinsic-elastica-cost dipacus graph-flow)        
@@ -33,6 +34,7 @@ target_link_libraries(intrinsic-elastica-cost PRIVATE
 -ldipacus-derivates
 -ldipacus-components
 -ldipacus-base
+-lemon
 -lboost_filesystem
 -lboost_system
 -pthread

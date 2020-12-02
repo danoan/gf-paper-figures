@@ -8,7 +8,11 @@ struct InputData{
   std::string shapeName;
   
   double M;
+  double m;
   double ringWidth;
+  double alpha;
+  double beta;
+  int maxIt;
 };
 
 InputData readInput(int argc, char* argv[]);

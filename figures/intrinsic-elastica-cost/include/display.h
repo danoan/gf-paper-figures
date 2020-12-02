@@ -12,8 +12,8 @@
 #include <string>
 #include <unordered_map>
 
-#include "EstimationData.h"
 #include "CostData.h"
+#include "EstimationData.h"
 
 namespace Display {
 typedef DGtal::Z2i::DigitalSet DigitalSet;
@@ -27,7 +27,14 @@ void displayVoronoi(const DigitalSet& shape, const Domain& domain, DTL2& dt,
 void displayCost(const std::unordered_map<Point, CostData>& costFunction,
                  const DigitalSet& innerContourK,
                  const std::string& outputFilepath, std::ostream& os,
-                 double maxCM = 1);
+                 double minCM = 0, double maxCM = 1);
+
+void displayOptRegions(const DigitalSet& sureFg, const DigitalSet& optBand,
+                       const std::set<Point>& sourcePoints,
+                       const std::set<Point>& targetPoints,
+                       const std::string& outputFilepath);
+
+void simpleDisplay(const DigitalSet& ds, const std::string& outputFilepath);
 }  // namespace Display
 
 #endif
