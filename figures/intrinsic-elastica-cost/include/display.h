@@ -14,6 +14,7 @@
 
 #include "CostData.h"
 #include "EstimationData.h"
+#include "KhalimskyEquivalent.h"
 
 namespace Display {
 typedef DGtal::Z2i::DigitalSet DigitalSet;
@@ -35,6 +36,9 @@ void displayOptRegions(const DigitalSet& sureFg, const DigitalSet& optBand,
                        const std::string& outputFilepath);
 
 void simpleDisplay(const DigitalSet& ds, const std::string& outputFilepath);
+
+void displayRing(const KhalimskyEquivalent& ke, const DigitalSet& ring,
+                 const std::string& outputFilepath);
 }  // namespace Display
 
 #endif

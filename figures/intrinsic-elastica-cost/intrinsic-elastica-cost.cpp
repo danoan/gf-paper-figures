@@ -52,102 +52,8 @@ void setEstimationDataMap(std::unordered_map<Point, EstimationData>& edMap,
   } while (it != scellRange.end());
 }
 
-Point inline getClosestPoint(const Point& p, const DigitalSet& shapeK,
-                             const DTL2& dtInn, const DTL2& dtOut) {
-  if (shapeK(p))
-    return dtInn.getVoronoiVector(p);
-  else
-    return dtOut.getVoronoiVector(p);
-}
-
-inline double getSDistance(const Point& p, double h,const DigitalSet& shapeK,
-                           const DTL2& dtInn, const DTL2& dtOut) {
-  if (shapeK(p))
-    return -dtInn(p) / (2 * h);
-  else
-    return dtOut(p) / (2 * h);
-}
-
-inline double getCurvatureCost(double curvatureEstimation, double sDistance) {
-  if (curvatureEstimation > 0)
-    return 1.0 / (1.0 / curvatureEstimation + sDistance);
-  else
-    return 1.0 / (1.0 / curvatureEstimation - sDistance);
-}
-
-void setKhalimskyEquivalent(KhalimskyEquivalent& ke, const Domain& domain,
-                            const Curve& shapeContour, double h) {
-  // Khalimsky shape and its complement
-  ke.innerContourK = Utils::buildKhalimskyContour(shapeContour, domain, h);
-  ke.shapeK.insert(ke.innerContourK.begin(), ke.innerContourK.end());
-
-  Point kpInn = *shapeContour.getInnerPointsRange().begin();
-  kpInn *= 2;
-  kpInn += Point(1, 1);
-  DIPaCUS::Misc::fillInterior(ke.shapeK, kpInn, ke.innerContourK);
-}
-
-void setCostFunction(std::unordered_map<LinelKCoords, CostData>& costFunction,
-                     const Domain& KDomain, const DigitalSet& shapeK,
-                     double ringWidth, double h, double alpha, double beta,
-                     const DTL2& dtInn, const DTL2& dtOut,
-                     const std::unordered_map<Point, EstimationData>& edMap) {
-  KSpace kspace;
-  kspace.init(KDomain.lowerBound(), KDomain.upperBound(), true);
-
-  DigitalSet ring = Utils::buildRing(KDomain, shapeK, dtInn, dtOut, ringWidth);
-
-  for (Point p : ring) {
-    if (p[0] % 2 == 0 && p[1] % 2 == 0) continue;            // Pointel
-    if (abs(p[0]) % 2 == 1 && abs(p[1]) % 2 == 1) continue;  // Pixel
-
-    Point closestPoint = getClosestPoint(p, shapeK, dtInn, dtOut);
-    double sDistance = getSDistance(p, h,shapeK, dtInn, dtOut);
-
-    // if (edMap.find(closestPoint) == edMap.end()) {
-    //   continue;
-    // }
-
-    EstimationData ed = edMap.at(closestPoint);
-    double curvatureCost = getCurvatureCost(ed.curvature, sDistance);
-
-    double cost = alpha * ed.localLength + beta * pow(curvatureCost, 2);
-
-    KSpace::SCell linel = kspace.sCell(p);
-    auto pixels = kspace.sUpperIncident(linel);
-
-    costFunction[p] =
-        CostData{kspace.sCoords(pixels[0]), kspace.sCoords(pixels[1]), cost};
-  }
-}
-
-std::unordered_map<LinelKCoords, CostData> getCostFunction(
-    const KhalimskyEquivalent& ke,
-    const std::unordered_map<Point, EstimationData>& edMap, double h,
-    double alpha, double beta, double ringWidth) {
-  const Domain& KDomain = ke.innerContourK.domain();
-
-  DigitalSet shapeKCompl(ke.shapeK.domain());
-  shapeKCompl.assignFromComplement(ke.shapeK);
-  shapeKCompl += ke.innerContourK;
-
-  // Distance transformations
-  auto dtInn = GraphFlow::Utils::Digital::exteriorDistanceTransform(
-      KDomain, shapeKCompl);
-
-  auto dtOut =
-      GraphFlow::Utils::Digital::exteriorDistanceTransform(KDomain, ke.shapeK);
-
-  // Set cost function
-  std::unordered_map<LinelKCoords, CostData> costFunction;
-  setCostFunction(costFunction, KDomain, ke.shapeK, ringWidth, h, alpha, beta,
-                  dtInn, dtOut, edMap);
-
-  return costFunction;
-}
-
 void setOptBand(DigitalSet& optBand,
-                const std::unordered_map<Point, CostData>& costFunction) {
+                const CostFunction& costFunction) {
   for (auto pk : costFunction) {
     Point linelKCoords = pk.first;
     CostData cd = pk.second;
@@ -186,7 +92,7 @@ void setTerminalPoints(std::set<Point>& sourcePoints,
 }
 
 DigitalSet computeCut(const Domain& domain, const DigitalSet& shape,
-                      const std::unordered_map<Point, CostData>& costFunction) {
+                      const CostFunction& costFunction) {
   DigitalSet optBand(domain);
   setOptBand(optBand, costFunction);
 
@@ -234,17 +140,14 @@ int main(int argc, char* argv[]) {
   while (it < id.maxIt) {
     Curve shapeContour;
     DIPaCUS::Misc::computeBoundaryCurve(shapeContour, shape);
-
+    
     std::unordered_map<Point, EstimationData> edMap;
     setEstimationDataMap(edMap, shapeContour, domain, shape, id.h);
 
-    KhalimskyEquivalent ke(domain);
-    setKhalimskyEquivalent(ke, domain, shapeContour, id.h);
-
-    auto costFunction =
-        getCostFunction(ke, edMap, id.h, id.alpha, id.beta, id.ringWidth);
-
-    DigitalSet sourceNodes = computeCut(domain, shape, costFunction);
+    KhalimskyEquivalent ke(domain, shapeContour, id.h);
+    CostFunction cf(ke, edMap, id.h, id.ringWidth, id.alpha, id.beta);
+    
+    DigitalSet sourceNodes = computeCut(domain, shape, cf);
 
     shape.clear();
     shape.insert(sourceNodes.begin(), sourceNodes.end());

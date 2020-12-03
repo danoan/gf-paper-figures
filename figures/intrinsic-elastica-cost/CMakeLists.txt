@@ -7,7 +7,9 @@ src/estimators.cpp
 src/display.cpp
 src/utils.cpp
 src/inputReader.cpp
-src/FlowGraph.cpp)
+src/FlowGraph.cpp
+src/CostFunction.cpp
+src/KhalimskyEquivalent.cpp)
 
 if(${USE_REMOTE_REPOSITORIES})
         add_dependencies(intrinsic-elastica-cost dipacus graph-flow)        

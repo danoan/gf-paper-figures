@@ -10,8 +10,6 @@ typedef DGtal::Z2i::Domain Domain;
 typedef DGtal::Z2i::Curve Curve;
 typedef GraphFlow::Utils::Digital::DTL2 DTL2;
 
-DigitalSet buildKhalimskyContour(const Curve& shapeContour,
-                                 const Domain& domain, double h);
 
 DigitalSet buildRing(const Domain& KDomain, const DigitalSet& shapeK,
                      const DTL2& dtInn, const DTL2& dtOut, double ringWidth);

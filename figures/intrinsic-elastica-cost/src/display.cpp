@@ -99,16 +99,24 @@ void displayOptRegions(const DigitalSet& sureFg, const DigitalSet& optBand,
                        const std::set<Point>& targetPoints,
                        const std::string& outputFilepath) {
   DGtal::Board2D board;
+  std::set<Point> optSourceIntersection;
+  for (auto p : sourcePoints)
+    if (optBand(p)) optSourceIntersection.insert(p);
+
+  std::set<Point> optTargetIntersection;
+  for (auto p : targetPoints)
+    if (optBand(p)) optTargetIntersection.insert(p);
+
+  for (auto p : sureFg) {
+    board << DGtal::CustomStyle(p.className(),
+                                new DGtal::CustomColors(DGtal::Color::Green,
+                                                        DGtal::Color::Green))
+          << p;
+  }
   for (auto p : sourcePoints) {
     board << DGtal::CustomStyle(p.className(),
                                 new DGtal::CustomColors(DGtal::Color::Blue,
                                                         DGtal::Color::Blue))
-          << p;
-  }
-  for (auto p : optBand) {
-    board << DGtal::CustomStyle(p.className(),
-                                new DGtal::CustomColors(DGtal::Color::Yellow,
-                                                        DGtal::Color::Yellow))
           << p;
   }
   for (auto p : targetPoints) {
@@ -117,10 +125,22 @@ void displayOptRegions(const DigitalSet& sureFg, const DigitalSet& optBand,
                  new DGtal::CustomColors(DGtal::Color::Red, DGtal::Color::Red))
           << p;
   }
-  for (auto p : sureFg) {
+  for (auto p : optBand) {
     board << DGtal::CustomStyle(p.className(),
-                                new DGtal::CustomColors(DGtal::Color::Green,
-                                                        DGtal::Color::Green))
+                                new DGtal::CustomColors(DGtal::Color::Yellow,
+                                                        DGtal::Color::Yellow))
+          << p;
+  }
+  for (auto p : optSourceIntersection) {
+    board << DGtal::CustomStyle(p.className(),
+                                new DGtal::CustomColors(DGtal::Color::Lime,
+                                                        DGtal::Color::Lime))
+          << p;
+  }
+  for (auto p : optTargetIntersection) {
+    board << DGtal::CustomStyle(p.className(),
+                                new DGtal::CustomColors(DGtal::Color::Magenta,
+                                                        DGtal::Color::Magenta))
           << p;
   }
   board.saveSVG(outputFilepath.c_str());
@@ -129,6 +149,20 @@ void displayOptRegions(const DigitalSet& sureFg, const DigitalSet& optBand,
 void simpleDisplay(const DigitalSet& ds, const std::string& outputFilepath) {
   DGtal::Board2D board;
   board << ds.domain() << ds;
+  board.saveSVG(outputFilepath.c_str());
+}
+
+void displayRing(const KhalimskyEquivalent& ke, const DigitalSet& ring,
+                 const std::string& outputFilepath) {
+  DGtal::Board2D board;
+  board << DGtal::CustomStyle(
+               ring.className(),
+               new DGtal::CustomColors(DGtal::Color::Red, DGtal::Color::Red))
+        << ring
+        << DGtal::CustomStyle(ring.className(),
+                              new DGtal::CustomColors(DGtal::Color::Yellow,
+                                                      DGtal::Color::Yellow))
+        << ke.innerContourK;
   board.saveSVG(outputFilepath.c_str());
 }
 }  // namespace Display

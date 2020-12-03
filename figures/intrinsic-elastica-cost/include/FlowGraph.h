@@ -8,6 +8,7 @@
 #include <lemon/preflow.h>
 
 #include "CostData.h"
+#include "CostFunction.h"
 
 class FlowGraph {
  public:
@@ -26,7 +27,7 @@ class FlowGraph {
  public:
   FlowGraph(const DigitalSet& vertexSet, const std::set<Point>& sourcePoints,
             const std::set<Point>& targetPoints,
-            const std::unordered_map<Point, CostData>& costFunction);
+            const CostFunction& costFunction);
   ~FlowGraph() { delete flow; }
   FlowGraph(const FlowGraph& fg) = delete;
   FlowGraph(FlowGraph&& fg) = delete;

@@ -3,7 +3,7 @@
 FlowGraph::FlowGraph(const DigitalSet& vertexSet,
                      const std::set<Point>& sourcePoints,
                      const std::set<Point>& targetPoints,
-                     const std::unordered_map<Point, CostData>& costFunction)
+                     const CostFunction& costFunction)
     : arcWeightMap(digraph), ntp(digraph) {
   terminalSource = digraph.addNode();
   terminalTarget = digraph.addNode();
