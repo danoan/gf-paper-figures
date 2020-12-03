@@ -17,8 +17,6 @@ CostFunction::CostFunction(const KhalimskyEquivalent& ke,
   DigitalSet ring =
       Utils::buildRing(KDomain, ke.shapeK, dtInn, dtOut, ringWidth);
 
-  Display::displayRing(ke, ring, "ring.svg");
-
   for (Point p : ring) {
     if (p[0] % 2 == 0 && p[1] % 2 == 0) continue;            // Pointel
     if (abs(p[0]) % 2 == 1 && abs(p[1]) % 2 == 1) continue;  // Pixel

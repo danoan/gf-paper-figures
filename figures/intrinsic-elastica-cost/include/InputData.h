@@ -3,16 +3,40 @@
 
 #include <string>
 
-struct InputData{
-  double h;
+struct InputData {
+  enum CurvatureEstimator { II, MDCA };
+  enum LengthEstimator { MDSS, LMDSS };
+
+  InputData() {
+    shapeName = "ball";
+
+    curvatureEstimator = II;
+    lengthEstimator = MDSS;
+
+    h = 1.0;
+    ringWidth = 2;
+    alpha = 1;
+    beta = 1;
+
+    maxIt = 10;
+
+    displayMaps = false;
+    outputFolder = "";
+  }
+
   std::string shapeName;
-  
-  double M;
-  double m;
+  CurvatureEstimator curvatureEstimator;
+  LengthEstimator lengthEstimator;
+
+  double h;
   double ringWidth;
   double alpha;
   double beta;
+
   int maxIt;
+
+  bool displayMaps;
+  std::string outputFolder;
 };
 
 InputData readInput(int argc, char* argv[]);

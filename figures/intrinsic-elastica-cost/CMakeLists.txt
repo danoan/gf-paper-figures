@@ -4,12 +4,13 @@ project(intrinsic-elastica-cost)
 add_executable(intrinsic-elastica-cost 
 intrinsic-elastica-cost.cpp
 src/estimators.cpp
-src/display.cpp
 src/utils.cpp
 src/inputReader.cpp
 src/FlowGraph.cpp
 src/CostFunction.cpp
-src/KhalimskyEquivalent.cpp)
+src/KhalimskyEquivalent.cpp
+src/OptRegions.cpp
+src/display.cpp)
 
 if(${USE_REMOTE_REPOSITORIES})
         add_dependencies(intrinsic-elastica-cost dipacus graph-flow)        

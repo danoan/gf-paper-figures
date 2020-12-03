@@ -15,6 +15,8 @@
 #include "CostData.h"
 #include "EstimationData.h"
 #include "KhalimskyEquivalent.h"
+#include "CostFunction.h"
+#include "OptRegions.h"
 
 namespace Display {
 typedef DGtal::Z2i::DigitalSet DigitalSet;
@@ -25,14 +27,11 @@ typedef DGtal::Z2i::Point Point;
 void displayVoronoi(const DigitalSet& shape, const Domain& domain, DTL2& dt,
                     const std::string& outputFilepath);
 
-void displayCost(const std::unordered_map<Point, CostData>& costFunction,
+void displayCost(const CostFunction& costFunction,
                  const DigitalSet& innerContourK,
-                 const std::string& outputFilepath, std::ostream& os,
-                 double minCM = 0, double maxCM = 1);
+                 const std::string& outputFilepath, std::ostream& os);
 
-void displayOptRegions(const DigitalSet& sureFg, const DigitalSet& optBand,
-                       const std::set<Point>& sourcePoints,
-                       const std::set<Point>& targetPoints,
+void displayOptRegions(const OptRegions& optRegions,
                        const std::string& outputFilepath);
 
 void simpleDisplay(const DigitalSet& ds, const std::string& outputFilepath);

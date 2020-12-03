@@ -9,7 +9,6 @@
 #include "CostData.h"
 #include "EstimationData.h"
 #include "KhalimskyEquivalent.h"
-#include "display.h"
 #include "utils.h"
 
 class CostFunction {

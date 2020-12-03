@@ -57,17 +57,26 @@ void displayVoronoi(const DigitalSet& shape, const Domain& domain, DTL2& dt,
   board.saveSVG(outputFilepath.c_str());
 }
 
-void displayCost(const std::unordered_map<Point, CostData>& costFunction,
+void displayCost(const CostFunction& costFunction,
                  const DigitalSet& innerContourK,
-                 const std::string& outputFilepath, std::ostream& os,
-                 double minCM, double maxCM) {
+                 const std::string& outputFilepath, std::ostream& os) {
   typedef DGtal::GradientColorMap<double,
                                   DGtal::ColorGradientPreset::CMAP_GRAYSCALE>
       MyColorMap;
 
-  MyColorMap hmap(minCM, maxCM);
   double M = 0;
   double m = 100;
+
+  for (auto pk : costFunction) {
+    double cost = pk.second.cost;
+    if (cost > M) M = cost;
+    if (cost < m) m = cost;
+  }
+
+  os << "Min unit cost: " << m << "\n"
+     << "Max unit cost: " << M << "\n";
+
+  MyColorMap hmap(m, M);
 
   DGtal::Board2D board;
   for (auto pk : costFunction) {
@@ -81,8 +90,6 @@ void displayCost(const std::unordered_map<Point, CostData>& costFunction,
                                 new DGtal::CustomColors(hmap(cost), hmap(cost)))
           << p;
   }
-  os << "Min unit cost: " << m << "\n"
-     << "Max unit cost: " << M << "\n";
 
   for (Point p : innerContourK) {
     board << DGtal::CustomStyle(p.className(),
@@ -94,38 +101,36 @@ void displayCost(const std::unordered_map<Point, CostData>& costFunction,
   board.saveSVG(outputFilepath.c_str());
 }
 
-void displayOptRegions(const DigitalSet& sureFg, const DigitalSet& optBand,
-                       const std::set<Point>& sourcePoints,
-                       const std::set<Point>& targetPoints,
+void displayOptRegions(const OptRegions& optRegions,
                        const std::string& outputFilepath) {
   DGtal::Board2D board;
   std::set<Point> optSourceIntersection;
-  for (auto p : sourcePoints)
-    if (optBand(p)) optSourceIntersection.insert(p);
+  for (auto p : optRegions.sourcePoints)
+    if (optRegions.optBand(p)) optSourceIntersection.insert(p);
 
   std::set<Point> optTargetIntersection;
-  for (auto p : targetPoints)
-    if (optBand(p)) optTargetIntersection.insert(p);
+  for (auto p : optRegions.targetPoints)
+    if (optRegions.optBand(p)) optTargetIntersection.insert(p);
 
-  for (auto p : sureFg) {
+  for (auto p : optRegions.sureFg) {
     board << DGtal::CustomStyle(p.className(),
                                 new DGtal::CustomColors(DGtal::Color::Green,
                                                         DGtal::Color::Green))
           << p;
   }
-  for (auto p : sourcePoints) {
+  for (auto p : optRegions.sourcePoints) {
     board << DGtal::CustomStyle(p.className(),
                                 new DGtal::CustomColors(DGtal::Color::Blue,
                                                         DGtal::Color::Blue))
           << p;
   }
-  for (auto p : targetPoints) {
+  for (auto p : optRegions.targetPoints) {
     board << DGtal::CustomStyle(
                  p.className(),
                  new DGtal::CustomColors(DGtal::Color::Red, DGtal::Color::Red))
           << p;
   }
-  for (auto p : optBand) {
+  for (auto p : optRegions.optBand) {
     board << DGtal::CustomStyle(p.className(),
                                 new DGtal::CustomColors(DGtal::Color::Yellow,
                                                         DGtal::Color::Yellow))
