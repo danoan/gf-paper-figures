@@ -41,7 +41,7 @@ void localLength(std::vector<double>& ev, const Curve& curve,
 
   DGtal::Z2i::KSpace kspace;
   kspace.init(domain.lowerBound(), domain.upperBound(), true);
-  mdssClosed<EstimationAlgorithms::ALG_PROJECTED>(kspace, curve.begin(),
+  mdssClosed<EstimationAlgorithms::ALG_SINCOS>(kspace, curve.begin(),
                                                   curve.end(), ev, h, nullptr);
 }
 }  // namespace Estimators

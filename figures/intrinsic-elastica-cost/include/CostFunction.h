@@ -25,7 +25,7 @@ class CostFunction {
 
  public:
   CostFunction(const KhalimskyEquivalent& ke, const EstimationDataMap& edMap,
-               double h, double ringWidth, double alpha, double beta);
+               double h, double ringWidth, double alpha, double beta,bool onlySquaredCurvature=false);
 
   inline const CostData& at(const LinelKCoords& lc) const {
     return m_linelCostMap.at(lc);

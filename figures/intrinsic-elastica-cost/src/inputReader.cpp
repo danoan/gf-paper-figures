@@ -17,6 +17,7 @@ void usage(char* argv[]) {
       << " [-a length penalization coefficient (default: 1.0)] \n"
       << " [-b squared curvature penalization coefficient (default: 1.0)] \n"
       << " [-i max iterations (default: 10)] \n"
+      << " [-O only squared curvature \n"
       << " [-d display maps] \n";
 }
 
@@ -29,7 +30,7 @@ InputData readInput(int argc, char* argv[]) {
   InputData id;
 
   int opt;
-  while ((opt = getopt(argc, argv, "S:K:L:h:w:a:b:i:d")) != -1) {
+  while ((opt = getopt(argc, argv, "S:K:L:h:w:a:b:i:Od")) != -1) {
     switch (opt) {
       case 'S': {
         id.shapeName = optarg;
@@ -75,6 +76,10 @@ InputData readInput(int argc, char* argv[]) {
         id.maxIt = std::atoi(optarg);
         break;
       }
+      case 'O': {
+        id.onlySquaredCurvature = true;
+        break;
+      }      
       case 'd': {
         id.displayMaps = true;
         break;

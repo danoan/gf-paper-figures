@@ -21,6 +21,7 @@ struct InputData {
     maxIt = 10;
 
     displayMaps = false;
+    onlySquaredCurvature=false;
     outputFolder = "";
   }
 
@@ -36,6 +37,7 @@ struct InputData {
   int maxIt;
 
   bool displayMaps;
+  bool onlySquaredCurvature;
   std::string outputFolder;
 };
 

@@ -61,7 +61,7 @@ void displayCost(const CostFunction& costFunction,
                  const DigitalSet& innerContourK,
                  const std::string& outputFilepath, std::ostream& os) {
   typedef DGtal::GradientColorMap<double,
-                                  DGtal::ColorGradientPreset::CMAP_GRAYSCALE>
+                                  DGtal::ColorGradientPreset::CMAP_JET>
       MyColorMap;
 
   double M = 0;
@@ -93,8 +93,8 @@ void displayCost(const CostFunction& costFunction,
 
   for (Point p : innerContourK) {
     board << DGtal::CustomStyle(p.className(),
-                                new DGtal::CustomColors(DGtal::Color::Blue,
-                                                        DGtal::Color::Blue))
+                                new DGtal::CustomColors(DGtal::Color::White,
+                                                        DGtal::Color::White))
           << p;
   }
 

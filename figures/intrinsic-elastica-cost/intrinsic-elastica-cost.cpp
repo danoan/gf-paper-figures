@@ -108,7 +108,7 @@ int main(int argc, char* argv[]) {
                          id.curvatureEstimator, id.lengthEstimator, id.h);
 
     KhalimskyEquivalent ke(domain, shapeContour, id.h);
-    CostFunction cf(ke, edMap, id.h, id.ringWidth, id.alpha, id.beta);
+    CostFunction cf(ke, edMap, id.h, id.ringWidth, id.alpha, id.beta,id.onlySquaredCurvature);
     OptRegions optRegions(domain, shape, cf);
 
     if (id.displayMaps) {

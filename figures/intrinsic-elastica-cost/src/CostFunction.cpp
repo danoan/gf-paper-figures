@@ -2,7 +2,7 @@
 
 CostFunction::CostFunction(const KhalimskyEquivalent& ke,
                            const EstimationDataMap& edMap, double h,
-                           double ringWidth, double alpha, double beta) {
+                           double ringWidth, double alpha, double beta,bool onlySquaredCurvature) {
   using namespace DGtal::Z2i;
 
   const Domain& KDomain = ke.innerContourK.domain();
@@ -31,7 +31,11 @@ CostFunction::CostFunction(const KhalimskyEquivalent& ke,
     EstimationData ed = edMap.at(closestPoint);
     double curvatureCost = getCurvatureCost(ed.curvature, sDistance);
 
-    double cost = alpha * ed.localLength + beta * pow(curvatureCost, 2);
+    double cost;
+    if(onlySquaredCurvature) 
+      cost = alpha * ed.localLength + beta * pow(curvatureCost, 2); 
+    else
+      cost = alpha * ed.localLength + beta * ed.localLength * pow(curvatureCost, 2);
 
     KSpace::SCell linel = kspace.sCell(p);
     auto pixels = kspace.sUpperIncident(linel);
@@ -54,15 +58,12 @@ inline double CostFunction::getSDistance(const LinelKCoords& p, double h,
                                          const DigitalSet& shapeK,
                                          const DTL2& dtInn, const DTL2& dtOut) {
   if (shapeK(p))
-    return -dtInn(p) / (2 * h);
+    return h*-dtInn(p) /2;
   else
-    return dtOut(p) / (2 * h);
+    return h*dtOut(p) / 2;
 }
 
 inline double CostFunction::getCurvatureCost(double curvatureEstimation,
                                              double sDistance) {
-  if (curvatureEstimation > 0)
-    return 1.0 / (1.0 / curvatureEstimation + sDistance);
-  else
-    return 1.0 / (1.0 / curvatureEstimation - sDistance);
+  return 1.0 / (1.0 / curvatureEstimation + sDistance);
 }
