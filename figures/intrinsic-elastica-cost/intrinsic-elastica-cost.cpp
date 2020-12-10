@@ -63,10 +63,10 @@ void setEstimationDataMap(std::unordered_map<Point, EstimationData>& edMap,
 }
 
 DigitalSet computeCut(const OptRegions& optRegions,
-                      const CostFunction& costFunction) {
+                      const CostFunction& costFunction,std::ostream& os) {
   FlowGraph fg(optRegions.optBand, optRegions.sourcePoints,
                optRegions.targetPoints, costFunction);
-  std::cout << "Cut Value:" << fg.cutValue() << std::endl;
+  os << "Cut Value:" << fg.cutValue() << std::endl;
 
   DigitalSet sourceNodes(optRegions.domain);
   for (Point p : optRegions.optBand) {
@@ -80,6 +80,8 @@ DigitalSet computeCut(const OptRegions& optRegions,
 int main(int argc, char* argv[]) {
   InputData id = readInput(argc, argv);
   boost::filesystem::create_directories(id.outputFolder);
+
+  std::ofstream ofs(id.outputFolder + "/summary.txt");
 
   Point border((int)ceil(40 / id.h), (int)ceil(40 / id.h));
 
@@ -96,7 +98,7 @@ int main(int argc, char* argv[]) {
 
   double currElastica =
       GraphFlow::Utils::Energy::elastica(shape, 5, id.h, id.alpha, id.beta);
-  std::cout << "Elastica: " << currElastica << std::endl;
+  ofs << "Elastica: " << currElastica << std::endl;
 
   int it = 0;
   while (it < id.maxIt) {
@@ -113,12 +115,12 @@ int main(int argc, char* argv[]) {
 
     if (id.displayMaps) {
       Display::displayCost(cf, ke.innerContourK,
-                           id.outputFolder + "/costFunction.svg", std::cout);
+                           id.outputFolder + "/costFunction.svg", ofs);
       Display::displayOptRegions(optRegions,
                                  id.outputFolder + "/optRegions.svg");
     }
 
-    DigitalSet sourceNodes = computeCut(optRegions, cf);
+    DigitalSet sourceNodes = computeCut(optRegions, cf,ofs);
 
     shape.clear();
     shape.insert(sourceNodes.begin(), sourceNodes.end());
@@ -131,7 +133,7 @@ int main(int argc, char* argv[]) {
 
     currElastica =
         GraphFlow::Utils::Energy::elastica(shape, 5, id.h, id.alpha, id.beta);
-    std::cout << "Elastica: " << currElastica << "\n\n";
+    ofs << "\nElastica: " << currElastica << "\n";
   }
 
   return 0;
