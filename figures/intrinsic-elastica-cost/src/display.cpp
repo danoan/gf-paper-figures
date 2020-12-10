@@ -60,8 +60,7 @@ void displayVoronoi(const DigitalSet& shape, const Domain& domain, DTL2& dt,
 void displayCost(const CostFunction& costFunction,
                  const DigitalSet& innerContourK,
                  const std::string& outputFilepath, std::ostream& os) {
-  typedef DGtal::GradientColorMap<double,
-                                  DGtal::ColorGradientPreset::CMAP_JET>
+  typedef DGtal::GradientColorMap<double, DGtal::ColorGradientPreset::CMAP_JET>
       MyColorMap;
 
   double M = 0;
@@ -73,7 +72,7 @@ void displayCost(const CostFunction& costFunction,
     if (cost < m) m = cost;
   }
 
-  os << "Min unit cost: " << m << "\n"
+  os << std::fixed << std::setprecision(3) << "Min unit cost: " << m << "\n"
      << "Max unit cost: " << M << "\n";
 
   MyColorMap hmap(m, M);
