@@ -23,9 +23,9 @@ function runForShapes()
 
     mkdir -p ${MAIN_OUTPUT_FOLDER}/${PREFIX}/${S}
     cp ${MAIN_DATA_FOLDER}/${PREFIX}/${S}/it-0.png ${MAIN_OUTPUT_FOLDER}/${PREFIX}/${S}/it-0.png
-    cp ${MAIN_DATA_FOLDER}/${PREFIX}/${S}/it-0.png ${MAIN_OUTPUT_FOLDER}/${PREFIX}/${S}/it-1.png
-    cp ${MAIN_DATA_FOLDER}/${PREFIX}/${S}/it-0.png ${MAIN_OUTPUT_FOLDER}/${PREFIX}/${S}/it-10.png
-    cp ${MAIN_DATA_FOLDER}/${PREFIX}/${S}/it-0.png ${MAIN_OUTPUT_FOLDER}/${PREFIX}/${S}/it-20.png
+    cp ${MAIN_DATA_FOLDER}/${PREFIX}/${S}/it-0001.png ${MAIN_OUTPUT_FOLDER}/${PREFIX}/${S}/it-0001.png
+    cp ${MAIN_DATA_FOLDER}/${PREFIX}/${S}/it-0010.png ${MAIN_OUTPUT_FOLDER}/${PREFIX}/${S}/it-0010.png
+    cp ${MAIN_DATA_FOLDER}/${PREFIX}/${S}/it-0015.png ${MAIN_OUTPUT_FOLDER}/${PREFIX}/${S}/it-0015.png
   done
 }
 
