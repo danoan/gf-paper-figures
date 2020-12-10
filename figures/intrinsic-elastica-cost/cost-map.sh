@@ -23,11 +23,13 @@ function runForShapes()
     OUTPUT_FOLDER=${MAIN_OUTPUT_FOLDER}/${PREFIX}
     
     $INTRINSIC_COST_APP -S$S -K$K -h$h -w$w -a$a -b$b $O -i1 -d ${DATA_FOLDER}/${S}
-    inkscape ${DATA_FOLDER}/${S}/costFunction.svg --export-pdf=${DATA_FOLDER}/${S}.pdf
-    rm -rf ${DATA_FOLDER}/${S}
+    inkscape ${DATA_FOLDER}/${S}/costFunction.svg --export-pdf=${DATA_FOLDER}/${S}.pdf    
 
     mkdir -p ${OUTPUT_FOLDER}
     cp ${DATA_FOLDER}/${S}.pdf ${OUTPUT_FOLDER}/${S}.pdf
+    cp ${DATA_FOLDER}/${S}/summary.txt ${OUTPUT_FOLDER}/${S}.txt
+
+    rm -rf ${DATA_FOLDER}/${S}
   done
 }
 
