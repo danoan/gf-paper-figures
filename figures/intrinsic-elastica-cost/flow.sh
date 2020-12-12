@@ -26,6 +26,7 @@ function runForShapes()
     cp ${MAIN_DATA_FOLDER}/${PREFIX}/${S}/it-0001.png ${MAIN_OUTPUT_FOLDER}/${PREFIX}/${S}/it-0001.png
     cp ${MAIN_DATA_FOLDER}/${PREFIX}/${S}/it-0010.png ${MAIN_OUTPUT_FOLDER}/${PREFIX}/${S}/it-0010.png
     cp ${MAIN_DATA_FOLDER}/${PREFIX}/${S}/it-0015.png ${MAIN_OUTPUT_FOLDER}/${PREFIX}/${S}/it-0015.png
+    cp ${MAIN_DATA_FOLDER}/${PREFIX}/${S}/summary.txt ${MAIN_OUTPUT_FOLDER}/${PREFIX}/${S}/summary.txt
   done
 }
 
