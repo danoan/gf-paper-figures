@@ -1,0 +1,17 @@
+Initially, we proposed the intrinsic elastica cost function. This cost function was constructed
+from the estimation of the elastica on the current shape contour. The cost of a linel was 
+defined according to the closest linel in the shape contour, and the distance from it.
+
+The obtained results are very poor, indicating that this cost function is not appropriate for 
+the evolution of a flow based on the elastica energy. A hypothesis for its failure is the 
+following: 
+
+It is too naive, and too limiting to set the cost of a farther linel in the domain based in a 
+single linel of the contour. We should expect that, if such a cost function exists, that it 
+should be based on a collection of neighbor linels.
+
+That is the motivation of the dispersion cost function. In this function, each linel in the 
+shape contour contributes to some value for the cost of linels inside some kernel (for example,
+a disk of radius R). Therefore, some linels may be influenced by more contour linels than 
+others. To balance this effect, we set the cost of each linel as the average of all the 
+influence contributions.

@@ -1,0 +1,13 @@
+I wonder the hidden effects of minimum cut computation based on costs given by the current
+elastica estimation.
+
+In this experiment I start with a disk of radius R and set the linels according to the elastica 
+estimation for this disk. I do the same for all digital disks with radius in some finite subset
+of the interval [R-a,R+a]. 
+
+By this somehow "ideal" cost function, it is possible to evolve the disk using minimum cuts and 
+expect to reproduce the willmore flow?
+
+Obs: This approach is somehow difficult to evaluate due to the ill-defined set of digital disks 
+in the interval centered at R. The idea of this experiment is tested further in the 
+ideal-cost-function experiment.

@@ -1,0 +1,23 @@
+This folder contains a series of experiments that aims to gain some intuition about the effect
+of different disk radius in the evolution of the graph-flow algorithm. In particular, we are 
+interested to know if we can relate the time step of the curve-shortening flow with the choice
+of the disk radius.
+
+find-balance-radius
+In this experiment, we evolve the curve-shortening flow for a continuous disk of radius R_0, that is, the 
+disk radius decrease by 1/R_t at each step t. 
+
+In parallel, we evolve the graph-flow for a discrete disk of radius R_0. The goal is to find the 
+value of the balance radius such that one step of the graph-flow produces the equivalent evolution
+of a one time step in the continuous curve-shortening flow. Our criteria is to maximize the ratio
+(change-of-perimeter)/(current-integral-squared-curvature). 
+
+length-ratio-decrease
+It is an auxiliar method that given a binary image, the disk estimation radius and the grid
+resolution, outputs the perimeter and the integral squared curvature.
+
+limit-radius
+For a given estimation radius, it computes the smallest disk in which the graph-flow is 
+unable to evolve the shape. Intuitively, a estimation radius R_a smaller than R_b is less
+sensitive than R_b. Therefore, it may be unable to detect small curvature values. Every
+estimation radius has a limit radius in which the graph-flow does not evolve. 

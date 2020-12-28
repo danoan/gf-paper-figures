@@ -1,0 +1,12 @@
+This experiment is a modification with respect to dispersion-cost.
+
+The dispersion-cost function generates results as poor as the original intrinsic elastica
+cost function. An hypothesis is that the influence kernel used is not appropriate. Instead
+of using an uniform kernel based on distance only, we propose to ponderate the kernel 
+elements by the cos of the angle that makes the element and the normal at the shape contour,
+the kernel center.
+
+Take any linel in the shape contour. Consider a frame in which the normal at the linel is the
+horizontal axis. Therefore, the influence of this linel is greater for elements that are closer
+to the horizontal axis. In particular, it has zero influence for elements in the vertical axis
+of this frame.

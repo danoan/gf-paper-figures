@@ -1,0 +1,6 @@
+We wonder if there exists a simple cost function that can induce the Willmore flow by the 
+computation of minimulm cuts.
+
+The idea here is to set the cost of a linel based on the elastica estimation on the current
+shape contour. The cost is then computed by considering the distance from the closest linel in 
+the shape contour.
