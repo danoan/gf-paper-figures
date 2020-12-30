@@ -22,6 +22,8 @@ using namespace DGtal::Z2i;
 typedef GraphFlow::Utils::Digital::DTL2 DTL2;
 typedef DGtal::Z2i::Point LinelKCoords;
 
+const double ESTIMATION_RADIUS=15;
+
 void setEstimationDataMap(std::unordered_map<Point, EstimationData>& edMap,
                           const Curve& curve, const Domain& domain,
                           const DigitalSet& shape,
@@ -35,7 +37,7 @@ void setEstimationDataMap(std::unordered_map<Point, EstimationData>& edMap,
   }
 
   else if (curvatureEstimator == InputData::II) {
-    Estimators::curvatureII(kV, curve, domain, shape, 5, h);
+    Estimators::curvatureII(kV, curve, domain, shape, ESTIMATION_RADIUS, h);
   }
 
   // To implement both length estimators
@@ -97,7 +99,7 @@ int main(int argc, char* argv[]) {
       shape, id.outputFolder + "/it-0.png");
 
   double currElastica =
-      GraphFlow::Utils::Energy::elastica(shape, 5, id.h, id.alpha, id.beta);
+      GraphFlow::Utils::Energy::elastica(shape, ESTIMATION_RADIUS, id.h, id.alpha, id.beta);
   ofs << "Elastica: " << currElastica << std::endl;
 
   int it = 0;
@@ -132,7 +134,7 @@ int main(int argc, char* argv[]) {
     GraphFlow::Utils::Display::saveDigitalSetAsImage(shape, outputFilepath);
 
     currElastica =
-        GraphFlow::Utils::Energy::elastica(shape, 5, id.h, id.alpha, id.beta);
+        GraphFlow::Utils::Energy::elastica(shape, ESTIMATION_RADIUS, id.h, id.alpha, id.beta);
     ofs << "\nElastica: " << currElastica << "\n";
   }
 

@@ -1,0 +1,18 @@
+The goal of this experiment is to define an ideal cost function for the disk shape.
+
+Starting with a disk of radius R, we set the weight of the linels in the current contour
+as the estimated value for the elastica for the linel. Next, we remove the eight contour
+of the shape and we repeat the process.
+
+However, there are linels in the domain that will not be set. Consider any sequence of n 
+horizontal pixels. The common linels between these pixels have no value setted in the cost 
+function. Indeed, those linels do not belong to any valid contour considered.
+
+It does not seem to exist a way to set the cost of those linels in a non artificial way.
+Here lies a crucial difference between the idea of an intrinsic elastica cost function for 
+the linels and the balance coefficient approach. 
+
+The balance coefficient approach is succesful because it can abstract a lot of information 
+due to its reliance in the current contour. In the intrinsinc cost function context, the cost 
+of a linel depends on the value it takes its own neighborhood. We do not want to handle 
+large neighborhood.
