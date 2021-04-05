@@ -4,7 +4,7 @@ project(graph-flow-paper-figures)
 set(CMAKE_CXX_STANDARD 17)
 set(EXTPROJECTS_SOURCE_DIR ${CMAKE_SOURCE_DIR}/ext-projects/source)
 
-if (${CMAKE_BUILD_TYPE} STREQUAL Release)
+if (${CMAKE_BUILD_TYPE} STREQUAL release)
     set(EXTPROJECTS_BUILD_DIR ${CMAKE_SOURCE_DIR}/ext-projects/cmake-build-release)
 else()
     set(EXTPROJECTS_BUILD_DIR ${CMAKE_SOURCE_DIR}/ext-projects/cmake-build-debug)
@@ -17,7 +17,8 @@ set(DIPACUS_INCLUDE_DIRS ${EXTPROJECTS_BUILD_DIR}/include CACHE PATH "DIPaCUS in
 set(DIPACUS_LIBS_DIR ${EXTPROJECTS_BUILD_DIR}/lib CACHE PATH "DIPaCUS libraries location path.")
 
 set(GEOC_INCLUDE_DIRS ${EXTPROJECTS_BUILD_DIR}/include CACHE PATH "GEOC include location path.")
-set(MAGLAC_INCLUDE_DIRS ${EXTPROJECTS_BUILD_DIR}/include CACHE PATH "MagLac include location path.")
+set(MAGLAC_BLACK_JACK_INCLUDE_DIRS ${EXTPROJECTS_BUILD_DIR}/magLac-black-jack CACHE PATH "MagLac v0.1 include location path.")
+set(MAGLAC_POKER_INCLUDE_DIRS ${EXTPROJECTS_BUILD_DIR}/magLac-poker CACHE PATH "MagLac v0.3 include location path.")
 
 set(GRAPHFLOW_INCLUDE_DIRS ${EXTPROJECTS_BUILD_DIR}/include CACHE PATH "GraphFlow include location path.")
 set(GRAPHFLOW_LIBS_DIR ${EXTPROJECTS_BUILD_DIR}/lib CACHE PATH "GraphFlow libraries location path.")

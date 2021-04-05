@@ -5,7 +5,7 @@ PROJECT_PATH=$( cd $SCRIPT_PATH && cd ../.. && pwd)
 
 source ${PROJECT_PATH}/figures/utils.sh
 
-APP_GRAPH_FLOW=${PROJECT_PATH}/ext-projects/cmake-build-release/bin/graph-flow-app
+APP_GRAPH_FLOW=${PROJECT_PATH}/ext-projects/cmake-build-release/bin/gf-shape-evolution
 APP_SUMMARY_FLOW=${PROJECT_PATH}/ext-projects/cmake-build-release/bin/summary-flow
 
 DATA_OUTPUT_FOLDER=${SCRIPT_PATH}/data

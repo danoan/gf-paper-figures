@@ -1,7 +1,7 @@
 output
 data
 install
-ext-projects
+ext-projects/source
 .idea
 cmake-build*
 __pycache__

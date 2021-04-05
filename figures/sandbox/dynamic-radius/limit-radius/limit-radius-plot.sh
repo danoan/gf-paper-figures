@@ -4,7 +4,7 @@ SCRIPT_PATH=$(cd $(dirname ${BASH_SOURCE[0]}) && pwd)
 PROJECT_PATH=$( cd $SCRIPT_PATH && cd ../../.. && pwd)
 
 GENERATE_DISK_APP="${PROJECT_PATH}/cmake-build-release/figures/dynamic-radius/limit-radius/generate-disk"
-GRAPH_FLOW_APP="${PROJECT_PATH}/ext-projects/cmake-build-release/bin/graph-flow-app"
+GRAPH_FLOW_APP="${PROJECT_PATH}/ext-projects/cmake-build-release/bin/gf-shape-evolution"
 LIMIT_RADIUS_APP="${SCRIPT_PATH}/limit-radius.sh"
 OUTPUT_FOLDER="${SCRIPT_PATH}/output"
 

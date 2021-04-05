@@ -1,6 +1,6 @@
 ExternalProject_Add(graph-flow
         GIT_REPOSITORY https://github.com/danoan/graph-flow.git
-        GIT_TAG v0.2.4
+        GIT_TAG v0.2.8-dev
         SOURCE_DIR ${EXTPROJECTS_SOURCE_DIR}/graph-flow
         CMAKE_ARGS
         -DCMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}
@@ -15,10 +15,10 @@ ExternalProject_Add(graph-flow
         -DGEOC_INCLUDE_DIRS=${EXTPROJECTS_BUILD_DIR}/include
         -DBTOOLS_INCLUDE_DIRS=${EXTPROJECTS_BUILD_DIR}/include
         -DBTOOLS_LIBS_DIRS=${EXTPROJECTS_BUILD_DIR}/lib
-        -DMAGLAC_INCLUDE_DIRS=${EXTPROJECTS_BUILD_DIR}/include
+        -DMAGLAC_INCLUDE_DIRS=${EXTPROJECTS_BUILD_DIR}/magLac-poker/include
         -DLEMON_INCLUDE_DIRS=${CMAKE_PREFIX_PATH}/include
         -DLEMON_LIBS_DIRS=${CMAKE_PREFIX_PATH}/lib
         -DBOOST_INCLUDE_DIRS=${BOOST_INCLUDE_DIRS}
         -DBOOST_LIBS_DIR=${BOOST_LIBS_DIR})
 
-add_dependencies(graph-flow dipacus geoc magLac)
+add_dependencies(graph-flow dipacus geoc magLac-poker)

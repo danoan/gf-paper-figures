@@ -5,7 +5,7 @@ PROJECT_PATH=$( cd $SCRIPT_PATH && cd ../.. && pwd)
 
 source ${PROJECT_PATH}/figures/utils.sh
 
-APP_GRAPH_SEG=${PROJECT_PATH}/ext-projects/cmake-build-release/bin/graph-seg-app
+APP_GRAPH_SEG=${PROJECT_PATH}/ext-projects/cmake-build-release/bin/gf-contour-correction
 
 INPUT_FOLDER=${SCRIPT_PATH}/input
 DATA_OUTPUT_FOLDER=${SCRIPT_PATH}/data
