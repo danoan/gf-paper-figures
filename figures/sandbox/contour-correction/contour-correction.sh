@@ -22,4 +22,3 @@ do
     cp ${DATA_OUTPUT_FOLDER}/${IMAGE}/corrected-seg.png ${OUTPUT_FOLDER}/${IMAGE}/corrected-seg.png
     cp ${DATA_OUTPUT_FOLDER}/${IMAGE}/gc-seg.png ${OUTPUT_FOLDER}/${IMAGE}/gc-seg.png
 done
-

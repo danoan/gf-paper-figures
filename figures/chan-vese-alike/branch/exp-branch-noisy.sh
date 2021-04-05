@@ -5,7 +5,7 @@ PROJECT_FOLDER="$(cd "${SCRIPT_FOLDER}" && cd ../../.. && pwd)"
 
 GRAPH_SEG_APP="${PROJECT_FOLDER}/ext-projects/cmake-build-release/cv-alike/bin/graph-seg-app"
 BRANCH_IMAGE="${SCRIPT_FOLDER}/input/branch-noisy.pgm"
-OUTPUT_FOLDER="${SCRIPT_FOLDER}/output/noisy"
+OUTPUT_FOLDER="${SCRIPT_FOLDER}/data/noisy"
 
 MAX_IT=10
 it=1

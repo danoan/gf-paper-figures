@@ -56,4 +56,3 @@ HEIGHT=$(identify ${DATA_FOLDER}/0000.png | cut -d" " -f3 | cut -d"x" -f2)
 echo "Creating plot frames..."
 mkdir -p ${FRAME_OUTPUT_PATH}
 gnuplot -e "LOAD_PATH=\"${GVFM_PATH}\";DATA_FILE=\"${DATA_FILE}\";TITLE='${EXPERIMENT^}';START_FRAME=0;END_FRAME=${NFRAMES};MAX_Y=${MAX_Y};MIN_Y=${MIN_Y};HEIGHT=${HEIGHT};OUTPUT_PATH=\"${FRAME_OUTPUT_PATH}\"" ${GVFM_PATH}/gvfm.gp
-

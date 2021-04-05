@@ -5,14 +5,14 @@ class Param:
         self.type=type
         self.items=[ {'path':resolver(prefix,v),'value':v} for v in items]
 
-GRID_STEP=[1.0,0.25,0.125]
-SHAPES=["bean","square","flower","triangle","ellipse"]
-RADIUS=[5,16,32]
+GRID_STEP=[0.5,0.25,0.125]
+SHAPES=["triangle","square","flower","bean","ellipse"]
+RADIUS=[5,16]
 LENGTH_PENALIZATION=[0.015625,0.0009765625]
 ITERATIONS=500
 OPT_BAND=[2]
 NEIGH_SIZE=[2]
-NUM_THREADS=32
+NUM_THREADS=8
 
 
 def resolve_double(prefix,d):

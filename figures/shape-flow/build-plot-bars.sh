@@ -16,7 +16,7 @@ gp_plot_config()
 	set style fill solid;
 	set logscale y 2;
 	set yrange[0:];
-	set xlabel 'Iterations';
+	set xlabel '';
 	set ylabel 'Elastica ({/Symbol a}=1/1024, {/Symbol b}=1)';\
     set xtics ('R0.625' 2.5, 'R2' 7.5);"
 }
@@ -63,11 +63,9 @@ IMAGE_ROOT_FOLDER=$1
 OUTPUT_FOLDER=${SCRIPT_PATH}/output/shape-flow/plots
 mkdir -p ${OUTPUT_FOLDER}
 
-#SHAPES="triangle square flower bean"
-SHAPES="triangle"
 LEN_PEN=0.00098
 
-create_multiplot "${OUTPUT_FOLDER}/bars.eps" "Balance coefficient radius" "$(build_bars_file $IMAGE_ROOT_FOLDER triangle $LEN_PEN 0)" "triangle" \
+create_multiplot "${OUTPUT_FOLDER}/bars.eps" "" "$(build_bars_file $IMAGE_ROOT_FOLDER triangle $LEN_PEN 0)" "triangle" \
 "$(build_bars_file $IMAGE_ROOT_FOLDER square $LEN_PEN 1)" "square" \
 "$(build_bars_file $IMAGE_ROOT_FOLDER flower $LEN_PEN 2)" "flower" \
 "$(build_bars_file $IMAGE_ROOT_FOLDER bean $LEN_PEN 3)" "bean"

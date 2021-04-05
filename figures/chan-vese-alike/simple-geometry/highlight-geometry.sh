@@ -8,7 +8,7 @@ source "${PROJECT_FOLDER}/figures/utils.sh"
 
 HIGHLIGHT_CONTOUR_APP="${PROJECT_FOLDER}/cmake-build-release/figures/chan-vese-alike/highlight-contour"
 BASE_IMAGE="${SCRIPT_FOLDER}/input/simple-geometry-noisy.pgm"
-DATA_FOLDER="${SCRIPT_FOLDER}/data/noisy/curvature/2"
+DATA_FOLDER="${SCRIPT_FOLDER}/data/noisy/curvature/4"
 OUTPUT_FOLDER="${PROJECT_FOLDER}/figures/chan-vese-alike/output/chan-vese-alike/simple-geometry"
 
 highlight_contour "${HIGHLIGHT_CONTOUR_APP}" "${BASE_IMAGE}" "${DATA_FOLDER}" "${OUTPUT_FOLDER}"

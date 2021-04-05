@@ -32,9 +32,11 @@ function highlight_contour(){
 
     _TOTAL=$(ls ${_DATA_FOLDER}/*.png | wc -l)
     _FINAL="00$(( ${_TOTAL}-3 )).png"
-    _MIDDLE=$( python -c "print( ${_TOTAL}/3 )" )
-    _MIDDLE="00${_MIDDLE}.png"
+    _MIDDLE=$( python -c "print( ${_TOTAL}//3 )" )
+    _MIDDLE="000${_MIDDLE}.png"
     _INITIAL="0000.png"
+
+    echo $_MIDDLE
 
     _it=0
     _CONTOURS="$_INITIAL $_MIDDLE $_FINAL"

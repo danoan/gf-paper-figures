@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 project(threshold-dynamics)
 
-add_executable(threshold-dynamics 
+add_executable(threshold-dynamics
 threshold-dynamics.cpp)
 
 add_dependencies(threshold-dynamics dipacus graph-flow)

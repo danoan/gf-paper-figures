@@ -10,7 +10,7 @@ OUTPUT_FOLDER="${SCRIPT_FOLDER}/data/noisy"
 MAX_IT=10
 it=1
 while [ $it -le $MAX_IT ]; do
-    $GRAPH_SEG_APP "${BRANCH_IMAGE}" "${OUTPUT_FOLDER}/curvature/${it}" -i-1 -N10 -g1 -k10 -A1 -B5 -O2 -a0 -w -s -d -n32 -h1 -r5
+    $GRAPH_SEG_APP "${BRANCH_IMAGE}" "${OUTPUT_FOLDER}/curvature/${it}" -i-1 -N10 -g1 -k10 -A1 -B5 -O2 -a0 -w -s -n32 -h1 -r5
     it=$(($it+1))
 done
 

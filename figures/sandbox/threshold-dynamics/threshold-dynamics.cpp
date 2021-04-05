@@ -86,7 +86,7 @@ int main(int argc, char* argv[]) {
     DigitalSet tempDiff(domain);
     DIPaCUS::SetOperations::setDifference(tempDiff, outSet, optSet);
     outSet.clear();
-    outSet.insert(tempDiff.begin(),tempDiff.end());    
+    outSet.insert(tempDiff.begin(),tempDiff.end());
 
     for (auto pair : pointRatioMap) {
       Point p = pair.first;

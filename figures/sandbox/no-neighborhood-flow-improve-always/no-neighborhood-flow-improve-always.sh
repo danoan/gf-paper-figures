@@ -17,7 +17,7 @@ mkdir -p ${OUTPUT_FOLDER}
 SHAPES="triangle square flower bean"
 for SHAPE in ${SHAPES}
 do
-    $APP_GRAPH_FLOW -S${SHAPE} -h0.125 -b1 -a0.015625 -r16 -v5 -O2 -N0 -n4 -i-1 -B30 -d -s ${DATA_OUTPUT_FOLDER}/${SHAPE}
+    $APP_GRAPH_FLOW -S${SHAPE} -h0.125 -b1 -a0.015625 -r16 -v5 -O2 -N0 -n4 -i-1 -B30 -s ${DATA_OUTPUT_FOLDER}/${SHAPE}
     $APP_SUMMARY_FLOW ${DATA_OUTPUT_FOLDER}/${SHAPE} ${DATA_OUTPUT_FOLDER}/${SHAPE}/summary.eps -j10 -e.png -r8 -h0.125
 
     cp ${DATA_OUTPUT_FOLDER}/${SHAPE}/summary.eps ${OUTPUT_FOLDER}/${SHAPE}.eps

@@ -7,7 +7,7 @@ class Param:
 
 GRID_STEP=[1.0,0.25,0.125]
 SHAPES=["bean","square","flower","triangle","ellipse"]
-RADIUS=[5,16,32]
+RADIUS=[5,16]
 LENGTH_PENALIZATION=[0.015625,0.0009765625]
 ITERATIONS=-1
 OPT_BAND=[2]

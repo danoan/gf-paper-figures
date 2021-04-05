@@ -49,7 +49,7 @@ function replace_zero_it_by_01(){
 }
 
 IMAGE_ROOT_FOLDER=$1
-OUTPUT_FOLDER=${SCRIPT_PATH}/output/shape-flow/plot-elastica
+OUTPUT_FOLDER=${SCRIPT_PATH}/output/shape-flow/plots
 TEMP_FOLDER=${OUTPUT_FOLDER}/temp
 
 mkdir -p ${OUTPUT_FOLDER}
