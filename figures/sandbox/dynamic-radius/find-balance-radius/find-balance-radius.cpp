@@ -4,7 +4,6 @@
 #include <graph-flow/shape-evolution/model/GraphFlowInput.h>
 #include <graph-flow/shape-evolution/model/GraphFlowIteration.h>
 #include <graph-flow/shape-evolution/shape-evolution.h>
-#include <graph-flow/utils/digital.h>
 #include <graph-flow/utils/string.h>
 
 #include <iostream>

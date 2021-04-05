@@ -3,7 +3,8 @@
 
 #include <DIPaCUS/derivates/Misc.h>
 
-#include <graph-flow/utils/digital.h>
+#include <graph-flow/utils/digital/misc.h>
+#include <graph-flow/utils/digital/shapes.h>
 #include <graph-flow/utils/string.h>
 #include <graph-flow/utils/display.h>
 
@@ -16,9 +17,9 @@ void getBand(const DigitalSet& shape, const Domain& domain, int optBand,
              DigitalSet& intPoints, DigitalSet& extPoints,
              const std::string& outputFolder) {
   auto dtl2Int =
-      GraphFlow::Utils::Digital::interiorDistanceTransform(domain, shape);
+      GraphFlow::Utils::Digital::Misc::interiorDistanceTransform(domain, shape);
   auto dtl2Ext =
-      GraphFlow::Utils::Digital::exteriorDistanceTransform(domain, shape);
+      GraphFlow::Utils::Digital::Misc::exteriorDistanceTransform(domain, shape);
 
   for (auto p : domain) {
     if (dtl2Int(p) > 0 && dtl2Int(p) <= optBand) intPoints.insert(p);
@@ -50,7 +51,7 @@ int main(int argc, char* argv[]) {
   boost::filesystem::path p(outputFolder);
   boost::filesystem::create_directories(p);
 
-  DigitalSet shape = GraphFlow::Utils::Digital::resolveShape(shapeName, gridStep);
+  DigitalSet shape = GraphFlow::Utils::Digital::Shapes::resolveShape(shapeName, gridStep);
   const Domain& domain = shape.domain();
 
   DigitalSet outSet(domain);

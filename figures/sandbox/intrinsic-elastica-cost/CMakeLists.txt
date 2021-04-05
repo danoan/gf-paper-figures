@@ -20,6 +20,7 @@ endif()
 target_include_directories(intrinsic-elastica-cost PRIVATE
 include
 ${DIPACUS_INCLUDE_DIRS}
+${MAGLAC_POKER_INCLUDE_DIRS}
 ${GRAPH_FLOW_INCLUDE_DIRS}
 ${DGTAL_INCLUDE_DIRS}
 ${BOOST_INCLUDE_DIRS}

@@ -1,6 +1,6 @@
 #include <DGtal/helpers/StdDefs.h>
 #include <DIPaCUS/derivates/Misc.h>
-#include <graph-flow/utils/digital.h>
+#include <graph-flow/utils/digital/shapes.h>
 #include <graph-flow/utils/display.h>
 #include <graph-flow/utils/energy.h>
 #include <graph-flow/utils/string.h>
@@ -19,7 +19,7 @@
 #include "utils.h"
 
 using namespace DGtal::Z2i;
-typedef GraphFlow::Utils::Digital::DTL2 DTL2;
+typedef GraphFlow::Utils::Digital::Misc::DTL2 DTL2;
 typedef DGtal::Z2i::Point LinelKCoords;
 
 const double ESTIMATION_RADIUS=15;
@@ -88,7 +88,7 @@ int main(int argc, char* argv[]) {
   Point border((int)ceil(40 / id.h), (int)ceil(40 / id.h));
 
   DigitalSet _shape =
-      GraphFlow::Utils::Digital::resolveShape(id.shapeName, id.h);
+      GraphFlow::Utils::Digital::Shapes::resolveShape(id.shapeName, id.h);
   Domain domain(_shape.domain().lowerBound() - border,
                 _shape.domain().upperBound() + border);
 

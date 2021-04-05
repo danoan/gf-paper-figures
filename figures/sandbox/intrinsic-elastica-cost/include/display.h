@@ -6,7 +6,7 @@
 #include <DGtal/io/colormaps/GradientColorMap.h>
 #include <DIPaCUS/components/Morphology.h>
 #include <DIPaCUS/derivates/Misc.h>
-#include <graph-flow/utils/digital.h>
+#include <graph-flow/utils/digital/misc.h>
 
 #include <map>
 #include <string>
@@ -21,7 +21,7 @@
 namespace Display {
 typedef DGtal::Z2i::DigitalSet DigitalSet;
 typedef DGtal::Z2i::Domain Domain;
-typedef GraphFlow::Utils::Digital::DTL2 DTL2;
+typedef GraphFlow::Utils::Digital::Misc::DTL2 DTL2;
 typedef DGtal::Z2i::Point Point;
 
 void displayVoronoi(const DigitalSet& shape, const Domain& domain, DTL2& dt,

@@ -17,8 +17,8 @@ set(DIPACUS_INCLUDE_DIRS ${EXTPROJECTS_BUILD_DIR}/include CACHE PATH "DIPaCUS in
 set(DIPACUS_LIBS_DIR ${EXTPROJECTS_BUILD_DIR}/lib CACHE PATH "DIPaCUS libraries location path.")
 
 set(GEOC_INCLUDE_DIRS ${EXTPROJECTS_BUILD_DIR}/include CACHE PATH "GEOC include location path.")
-set(MAGLAC_BLACK_JACK_INCLUDE_DIRS ${EXTPROJECTS_BUILD_DIR}/magLac-black-jack CACHE PATH "MagLac v0.1 include location path.")
-set(MAGLAC_POKER_INCLUDE_DIRS ${EXTPROJECTS_BUILD_DIR}/magLac-poker CACHE PATH "MagLac v0.3 include location path.")
+set(MAGLAC_BLACK_JACK_INCLUDE_DIRS ${EXTPROJECTS_BUILD_DIR}/magLac-black-jack/include CACHE PATH "MagLac v0.1 include location path.")
+set(MAGLAC_POKER_INCLUDE_DIRS ${EXTPROJECTS_BUILD_DIR}/magLac-poker/include CACHE PATH "MagLac v0.3 include location path.")
 
 set(GRAPHFLOW_INCLUDE_DIRS ${EXTPROJECTS_BUILD_DIR}/include CACHE PATH "GraphFlow include location path.")
 set(GRAPHFLOW_LIBS_DIR ${EXTPROJECTS_BUILD_DIR}/lib CACHE PATH "GraphFlow libraries location path.")
