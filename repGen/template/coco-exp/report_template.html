@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Graph flow and Coco dataset experiment report</title>
+
+    <link rel="stylesheet" type="text/css" href="report.css"></link>
+    <script type="text/javascript" src="report.js"></script>
+
+</head>
+<body>
+
+<h1>Coco experiment report</h1>
+
+<h2>Image browsing</h2>
+
+<div class="row">
+    {% for param in paramCollection %}
+        <div class="collumn" menu>
+            <ul>
+                <li class="header">{{ param.name }}</li>
+                {% for item in param.items %}
+                    <li class="button" onclick="select(this)" path="{{ item['path'] }}" type="{{ param.type }}">{{ item['value'] }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+
+</div>
+
+<div class="display">
+    <div class="display-1 full active">
+
+        <div class="coco-annotation">
+            <img src="invalid.png" onclick="open_src(this)" onerror="this.src='invalid.png'" /><br>
+            Coco Annotation
+        </div>
+
+        <div class="gc-seg">
+            <img src="invalid.png" img_seq="0" onclick="open_src(this)" onerror="this.src='invalid.png'" /><br>
+            Graph Cut Segmentation
+        </div>
+
+        <div class="corrected-seg-with-data">
+            <img src="invalid.png" onclick="open_src(this)" onerror="this.src='invalid.png'" /><br>
+            Corrected Segmentation With Data
+        </div>
+
+        <div class="corrected-seg-without-data">
+            <img src="invalid.png" onclick="open_src(this)" onerror="this.src='invalid.png'" /><br>
+            Corrected Segmentation Without Data
+        </div>
+    </div>
+
+    <h2>Statistics</h2>
+    
+    <div class="statistics">
+        <img src="data/box-plot-mixed.png" class="miniature" onclick="open_src(this)" onerror="this.src='data/box-plot-mixed.png'" />
+        <img src="data/box-plot-correction.png" class="miniature" onclick="open_src(this)" onerror="this.src='data/box-plot-correction.png'" />
+        <img src="data/Mixed.png" class="miniature" onclick="open_src(this)" onerror="this.src='data/Mixed.png'" /><br>
+    </div>
+
+</div>
+
+</body>
+</html>
