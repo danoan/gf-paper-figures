@@ -82,7 +82,7 @@ struct UComputer
       thickness(thickness),
       ballArea(DBI.digitalBall().size())
   {
-    M=pow(ballArea/2.0,2);
+    M=ballArea/2.0;//pow(ballArea/2.0,2);
   }
 
   void compute()
@@ -94,7 +94,7 @@ struct UComputer
       DBI.operator()(temp,p);
       
       double diff = ballArea/2.0 - temp.size();
-      uMap[p] = pow(diff,2);
+      uMap[p] = diff;//pow(diff,2);
 
       if(diff<=thickness) minLevel.insert(p);
     }
@@ -119,7 +119,7 @@ void drawLevelSet(const DigitalSet& shape, double radius, double thickness,const
   uc.compute();
 
   typedef DGtal::GradientColorMap<double,DGtal::ColorGradientPreset::CMAP_JET> MyColorMap;
-  MyColorMap hmap(0,uc.M);
+  MyColorMap hmap(-uc.M,uc.M);
 
 
   DGtal::Board2D board;
@@ -158,7 +158,7 @@ void drawLevelSet(const DigitalSet& shape, double radius, double thickness,const
   for(auto p:zeroLevel)
   {
     board << DGtal::CustomStyle( specificStyle,
-                                 new DGtal::CustomColors( DGtal::Color::Magenta,DGtal::Color::Magenta ) )
+                                 new DGtal::CustomColors( DGtal::Color::Black,DGtal::Color::Black ) )
           << p;
   }
 

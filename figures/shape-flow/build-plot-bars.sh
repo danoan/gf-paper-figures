@@ -18,7 +18,7 @@ gp_plot_config()
 	set yrange[0:];
 	set xlabel '';
 	set ylabel 'Elastica ({/Symbol a}=1/1024, {/Symbol b}=1)';\
-    set xtics ('R0.625' 2.5, 'R2' 7.5);"
+    set xtics ('r=0.625' 2.5, 'r=2' 7.5);"
 }
 
 gp_add_plot()
