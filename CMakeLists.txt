@@ -13,6 +13,9 @@ endif ()
 set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib:${EXTPROJECTS_BUILD_DIR}/lib")
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
+set(BOOST_INCLUDE_DIRS /usr/local/include/boost CACHE PATH "Boost include location path." )
+set(BOOST_LIBS_DIR /usr/local/lib CACHE PATH "Boost libraries location path.")
+
 set(DIPACUS_INCLUDE_DIRS ${EXTPROJECTS_BUILD_DIR}/include CACHE PATH "DIPaCUS include location path.")
 set(DIPACUS_LIBS_DIR ${EXTPROJECTS_BUILD_DIR}/lib CACHE PATH "DIPaCUS libraries location path.")
 
@@ -32,6 +35,7 @@ add_subdirectory(figures/zero-level-set)
 add_subdirectory(figures/chan-vese-alike)
 add_subdirectory(figures/coco-experiment/util-apps/correction-report)
 add_subdirectory(figures/coco-experiment/util-apps/exp-seg-mask)
+add_subdirectory(figures/didactic-one-iteration)
 add_subdirectory(figures/sandbox/ring)
 add_subdirectory(figures/sandbox/threshold-dynamics)
 add_subdirectory(figures/sandbox/need-for-squared-curvature)
