@@ -34,7 +34,7 @@ def scatter_plot(data,metric="Precision"):
   xticks.extend(xlabelPos)
   ax.set_xticks(xticks)
   ax.set_xticklabels(xlabels,rotation=90)
-  ax.legend( ["Graph Cut","Contour Correction-With-Data","Contour Correction Without Data"] )
+  ax.legend( ["Graph Cut","GFA With Data","GFA Without Data"] )
 
   fig.savefig("{}/{}.png".format(OUTPUT_DIR,metric),
   bbox_inches='tight',
@@ -64,7 +64,7 @@ with open("{}/results.txt".format(OUTPUT_DIR),"w") as f:
 plt.rcParams.update({'font.size': 22})
 
 fig,ax = plt.subplots(figsize=(20,10))
-fig.suptitle("GF normalization metrics with respect to grabcut")
+fig.suptitle("GFA normalization metrics with respect to grabcut")
 data_correction["Elastica\nreduction"] = (data_correction["elastica-gc"] - data_correction["elastica-cc"])/data_correction["elastica-gc"]
 data_correction["Inflection\nreduction"] = (data_correction["inflection-gc"] - data_correction["inflection-cc"])/data_correction["inflection-gc"]
 
@@ -75,8 +75,8 @@ pad_inches=0)
 
 fig,ax = plt.subplots(figsize=(20,10))
 fig.suptitle("0.5 x (Precision + Recall)")
-temp=data_recall.rename({"gc-Mixed":"grabcut","ccd-Mixed":"GF\nwith data", "ccnd-Mixed": "GF\nwithout data"},axis=1)
-temp[ ["grabcut","GF\nwith data","GF\nwithout data"] ].plot.box(ax=ax)
+temp=data_recall.rename({"gc-Mixed":"grabcut","ccnd-Mixed": "GFA\nwithout data","ccd-Mixed":"GFA\nwith data"},axis=1)
+temp[ ["grabcut","GFA\nwithout data","GFA\nwith data"] ].plot.box(ax=ax)
 fig.savefig("{}/box-plot-mixed.png".format(OUTPUT_DIR),
 bbox_inches='tight',
 pad_inches=0)

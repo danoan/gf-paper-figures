@@ -201,27 +201,27 @@ function copy_paper_figures(){
   SAMPLE_IMAGES="${BASE_OUTPUT}/sample-images"
   mkdir -p ${SAMPLE_IMAGES}
 
-  cp -r ${KITE} ${SAMPLE_IMAGES}/kite
-  cp -r ${MOTO} ${SAMPLE_IMAGES}/moto
-  cp -r ${GIRAFFE} ${SAMPLE_IMAGES}/giraffe
+  cp -rT ${KITE} ${SAMPLE_IMAGES}/kite
+  cp -rT ${MOTO} ${SAMPLE_IMAGES}/moto
+  cp -rT ${GIRAFFE} ${SAMPLE_IMAGES}/giraffe
 
   TANGENT_PROFILE="${BASE_OUTPUT}/tangent-profile"
   mkdir -p ${TANGENT_PROFILE}
 
-  cp -r ${BASEBALL} ${TANGENT_PROFILE}/baseball
+  cp -rT ${BASEBALL} ${TANGENT_PROFILE}/baseball
 
   PARAMETER_TUNNING="${BASE_OUTPUT}/parameter-tuning"
   mkdir -p ${PARAMETER_TUNNING}
 
-  cp -r ${SHEEP_R3} ${PARAMETER_TUNNING}/sheep_r3
-  cp -r ${SHEEP_R5} ${PARAMETER_TUNNING}/sheep_r5
+  cp -rT ${SHEEP_R3} ${PARAMETER_TUNNING}/sheep_r3
+  cp -rT ${SHEEP_R5} ${PARAMETER_TUNNING}/sheep_r5
 
   COMPLETION="${BASE_OUTPUT}/completion"
   mkdir -p ${COMPLETION}
 
-  cp -r ${CUP} ${COMPLETION}/cup
-  cp -r ${ZEBRA} ${COMPLETION}/zebra
-  cp -r ${TRAIN} ${COMPLETION}/train
+  cp -rT ${CUP} ${COMPLETION}/cup
+  cp -rT ${ZEBRA} ${COMPLETION}/zebra
+  cp -rT ${TRAIN} ${COMPLETION}/train
 
   cp ${OUTPUT_FOLDER}/data/box-plot-correction.png ${BASE_OUTPUT}/box-plot-correction.png
   cp ${OUTPUT_FOLDER}/data/box-plot-mixed.png ${BASE_OUTPUT}/box-plot-mixed.png
@@ -243,4 +243,4 @@ create_report
 running_time_table
 copy_paper_figures
 
-#clean
+# clean
