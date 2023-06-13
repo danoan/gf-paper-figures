@@ -1,7 +1,12 @@
-output
-data
-install
-ext-projects/source
 .idea
-cmake-build*
+.venv
+.vscode
+.cache
 __pycache__
+build
+cmake-build*
+compile_commands.json
+data
+ext-projects/source
+install
+output
