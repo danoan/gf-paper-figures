@@ -27,6 +27,8 @@ set(GRAPHFLOW_INCLUDE_DIRS ${EXTPROJECTS_BUILD_DIR}/include CACHE PATH "GraphFlo
 set(GRAPHFLOW_LIBS_DIR ${EXTPROJECTS_BUILD_DIR}/lib CACHE PATH "GraphFlow libraries location path.")
 
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
+
 find_package(DGtal REQUIRED)
 find_package(OpenCV REQUIRED)
 
