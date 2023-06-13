@@ -79,7 +79,6 @@ create_multiplot()
 
 	buffer="${buffer}$(gp_save)"
 
-
 	`gnuplot -e "$buffer"`
 	`mv ${temp_plot} ${fileoutput}`
 }
