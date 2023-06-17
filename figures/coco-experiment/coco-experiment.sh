@@ -16,7 +16,7 @@ N=3
 O=4
 g=1
 G=1
-a=10
+a=0.001
 R=5
 h=1.0
 
@@ -34,7 +34,7 @@ function create_gc_object(){
 
 function run_contour_correction()
 {
-  CONTOUR_CORRECTION_APP="${PROJECT_PATH}/ext-projects/cmake-build-release/bin/gf-contour-correction"
+  CONTOUR_CORRECTION_APP="${PROJECT_PATH}/ext-projects/cmake-build-release/bin/gf-segmentation"
   EXPORT_SEG_MASK_APP="${PROJECT_PATH}/install/bin/export-seg-mask"
 
   GC_OBJECT_DATA_DIR="${OUTPUT_FOLDER}/interactive-seg"
@@ -57,7 +57,7 @@ function extra_contour_correction()
   GC_OBJECT_DATA_DIR="${OUTPUT_FOLDER}/interactive-seg"
 
   cp -r "${GC_OBJECT_DATA_DIR}/000000044699" "${GC_OBJECT_DATA_DIR}/000000200000"
-  CONTOUR_CORRECTION_APP="${PROJECT_PATH}/ext-projects/cmake-build-release/bin/gf-contour-correction"
+  CONTOUR_CORRECTION_APP="${PROJECT_PATH}/ext-projects/cmake-build-release/bin/gf-segmentation"
   EXPORT_SEG_MASK_APP="${PROJECT_PATH}/install/bin/export-seg-mask"
 
   mkdir -p "${CONTOUR_CORRECTION_OUTPUT_DIR}"

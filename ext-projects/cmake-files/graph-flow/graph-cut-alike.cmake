@@ -1,6 +1,6 @@
 ExternalProject_Add(graph-flow
         GIT_REPOSITORY https://github.com/danoan/graph-flow.git
-        GIT_TAG v0.2.8
+        GIT_TAG v0.2.9-dev
         SOURCE_DIR ${EXTPROJECTS_SOURCE_DIR}/graph-flow
         CMAKE_ARGS
         -DCMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}

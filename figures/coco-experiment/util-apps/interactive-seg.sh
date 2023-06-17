@@ -41,7 +41,7 @@ t="-1"
 w=""
 s=""
 n="4"
-v="automatic-correction-length-data"
+v="automatic-correction-data"
 while getopts ":R:r:G:K:g:k:a:O:N:H:j:i:t:n:v:I:ws" o; do
     case "${o}" in
         R)
@@ -120,7 +120,7 @@ fi
 
 SEED_SELECTOR_APP="${GRAPH_SEG_BIN}/seed-selector"
 GRAB_CUT_APP="${GRAPH_SEG_BIN}/grabcut"
-GRAPH_SEG_APP="${GRAPH_SEG_BIN}/gf-contour-correction"
+GRAPH_SEG_APP="${GRAPH_SEG_BIN}/gf-segmentation"
 
 
 IMAGE_NAME="$(basename $INPUT_IMAGE)"
